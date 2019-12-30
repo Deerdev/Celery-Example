@@ -13,3 +13,10 @@ result.get(timeout=2)
 
 # 抛出异常时，打印堆栈
 # result.traceback
+
+# 任务成功与否
+# result.failed()
+# result.successful()
+
+# 任务状态 PENDING -> STARTED -> SUCCESS
+# result.state
