@@ -19,7 +19,7 @@ timezone = "Asia/Shanghai"
 imports = ["base.log_task"]
 
 # 任务名：队列
-# 可以正则匹配
+# 可以正则匹配, 查看 proj.route 文件
 task_routes_1 = {
     'celery.ping': 'default',
     'mytasks.add': 'cpu-bound',
@@ -36,6 +36,7 @@ task_routes_1 = {
 task_routes_2 = ('myapp.tasks.route_task', {'celery.ping': 'default'})
 
 # 方法 myapp.tasks.route_task -> 调用 route_task
+# task 为 task的名称
 def route_task(self, name, args, kwargs, options, task=None, **kw):
     if task == 'celery.ping':
         return {'queue': 'default'}

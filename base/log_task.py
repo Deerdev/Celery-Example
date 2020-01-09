@@ -1,12 +1,13 @@
 import celery
 from celery.exceptions import Retry
+from time import sleep
 from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 
 class BaseTask(celery.Task):
     def __init__(self):
-        self.name = "base task"
+        self.name = "base_task"
 
     def run(self, *args, **kwargs):
         print("task run")
@@ -32,10 +33,12 @@ class BaseTask(celery.Task):
 class LogTask(BaseTask):
     def __init__(self):
         super(LogTask, self).__init__()
-        self.name = "log task"
+        self.name = "log_task"
 
     def run(self, *args, **kwargs):
         print("log task")
         print(args)
         print(kwargs)
+        sleep(3)
         logger.info(kwargs)
+        return "hello world"

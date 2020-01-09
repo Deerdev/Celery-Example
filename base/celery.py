@@ -12,3 +12,6 @@ app.config_from_object(app_config)
 # 先注册，再调用
 app.tasks.register(LogTask())
 celery_log_task = LogTask()
+
+
+# celery -A base worker --loglevel=info

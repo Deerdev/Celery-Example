@@ -9,6 +9,12 @@ app = Celery('proj',
 # include:  启动时需要 import 的 work，a list of modules to import when the worker starts.
 # You need to add our tasks module here so that the worker is able to find our tasks
 
+# 通过 autodiscover_tasks 发现任务
+# 扫描发现 proj 和 base 目录下的 包含 'task' 的文件，读取注册 celery 任务
+app.autodiscover_tasks(packages=['proj',
+                                 'base',
+                                 ], related_name='task', force=True)
+
 # 设置时区
 app.conf.timezone = 'Asia/Shanghai'
 
@@ -50,6 +56,9 @@ app.conf.update(
 
 # 显示在线worker
 # celery -A proj status
+
+# 显示 work 详情
+# celery -A celery_app inspect stats --destination=celery@xxxxx
 
 
 if __name__ == '__main__':

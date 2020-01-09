@@ -3,6 +3,8 @@ from celery import app
 
 # '任务路径'：'任务队列'
 # 'feed.tasks.*' feed.tasks 下的所有任务都在 feeds queue 处理
+#   - 可以是task 自定义的名称：@app.task(name="feed.tasks.search_pod")
+#   - 可以是按照import的目录路径，如 base.log_task.LogTask
 # 支持模糊匹配和正则
 task_routes = ([
     ('feed.tasks.*', {'queue': 'feeds'}),
